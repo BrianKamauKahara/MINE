@@ -1,0 +1,350 @@
+ * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Consolas', 'Courier New', monospace;
+ }
+
+ .fade {
+    transition: opacity 0.7s ease;                   
+}
+  
+.noned-out {
+    transition: opacity 0.7s ease; 
+    opacity: 0;                    
+    pointer-events: none;          
+}
+
+body {
+    background-color: #f5f5dc;
+    display: grid;
+    grid-template:
+        "a a a a" 10%
+        "b b b b" 40%
+        "b b b b" 40%
+        "d d d d" 10% / 1fr ;
+    height: 100vh;
+    justify-items: center;
+}
+
+
+.head-bar {
+    grid-area: a;
+    width: 100vw;
+    background-color: #e5e5e5;
+    border: 1px solid black;
+    box-shadow: 4px 2px 2px white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    transition: transform 0.2s ease, transform 0.2s ease;
+}
+
+.head-bar:hover {
+    transform: scale(1.05); /* Slightly scale up the div */
+    transform: translateY(4px);
+    box-shadow: 8px 4px 10px rgba(0, 0, 0, 0.3); /* Increase shadow for pop-up effect */
+}
+
+.timer-display, .mines-count {
+    margin: 2rem;
+    font-size: 3rem;
+    font-weight: bolder;
+}
+
+.hourglass, .mine-show {
+    font-size: 3rem;
+    font-weight: bolder;
+}
+
+.test-div {
+    grid-area: b;
+    background: rgba(128, 128, 128, 0.479);
+    margin: 1rem;
+    height: 90%;
+    max-height: 80vh;
+    width: 80vw;
+    border-radius: 6px 100px 10px 200px;
+    box-shadow: 10px 18px 2px rgba(0, 0, 0, 0.411);
+    transition: transform 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease;
+
+    /* display: flex;
+    justify-content: center; */
+    display: grid;
+    grid-template-columns: 1fr 6fr 1fr;
+    align-items: center;
+    /* display: grid;
+    grid-template: repeat(9, 1fr) / repeat(9, 1fr); */
+    padding: clamp(2rem, 5vw, 8rem);
+}
+
+.test-div:hover {
+    transform: scale(1.05) rotate(-0.5deg); /* Slight scaling and rotation */
+    background-color: rgba(128, 128, 255, 0.5); /* Lighten the background */
+    box-shadow: 15px 25px 10px rgba(0, 0, 0, 0.5); /* Intensify the shadow */
+    border-radius: 100px 6px 200px 10px; /* Flip the border radius */
+}
+
+.left-panel {
+    background-color: #bc1aa6b7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: inset 6px 6px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 16px 16px 16px 80px;
+    transition: transform 0.2s ease, box-shadow 0.4s ease, border-radius 0.2s ease;
+}
+
+
+.left-panel:hover {
+    transform: translate(-10px, -10px);
+    box-shadow: 10px 10px 4px black;
+    border-radius: 5px 5px 5px 80px    
+}
+
+#start-game-btn {
+    margin: 1rem 0.5rem 0rem 0.5rem;
+    padding: clamp(0.25rem,1vw,1rem);
+    border-radius: 12px;
+    border: 4px solid #a9a9a9;
+    background-color: white;
+
+    font-size: 2rem;
+    font-weight: bolder;
+    transition: transform 0.3s ease;
+}
+
+#start-game-btn:hover {
+    transform: translateY(-10px);
+    background-color: rgba(166, 250, 140, 0.651);
+}
+
+#reset-game-btn {
+    margin: 0.25rem;
+    padding: clamp(0.25rem,1vw,1rem);
+    border-radius: 12px;
+    border: 4px solid #a9a9a9;
+    background-color: white;
+    
+    grid-row-start: 2;
+    font-size: 2rem;
+    font-weight: bolder;
+    transition: transform 0.3s ease;
+}
+
+#reset-game-btn:hover {
+    transform: translateY(-10px);
+    background-color: rgba(230, 48, 35, 0.973);
+    border-color: rgba(230, 48, 35, 0.973);
+}
+
+#pause-game-btn {
+    margin: 0 0.5rem 1rem 0.5rem;
+    padding: clamp(0.25rem,1vw,1rem);
+    border-radius: 12px 12px 0px 80px;
+    border: 4px solid #a9a9a9;
+    background-color: white;
+    
+    grid-row-start: 2;
+    font-size: 2rem;
+    font-weight: bolder;
+    transition: transform 0.3s ease;
+}
+
+#pause-game-btn:hover {
+    transform: translateY(-10px);
+    background-color: rgba(35, 54, 230, 0.753);
+    border-color: rgba(35, 54, 230, 0.753);;
+}
+
+.right-panel {
+    background-color: #76bc1ab7;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 60%;
+    box-shadow: inset 6px 6px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 16px 16px 80px 16px;
+    transition: transform 0.2s ease, box-shadow 0.4s ease, border-radius 0.2s ease;
+}
+
+.right-panel:hover {
+    transform: translate(10px, -10px);
+    box-shadow: -10px 10px 4px black;
+    border-radius: 5px 5px 80px 5px    
+}
+
+.title-score-display {
+    padding: 1rem;
+    margin: 1rem;
+    font-size: 2rem;
+    border-radius: 4px 4px 20px 4px;
+    color: white;
+    border: 4px solid white;
+}
+
+.score-display {
+    padding: 0.5rem;
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.tile {
+    background-color: #a9a9a9;
+    border-radius: 5px 5px 5px 5px; 
+    border: 1px solid rgba(0, 0, 0, 0.37);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.527);
+    display: grid;
+    place-content: center;
+    transition: transform 1.2s ease;
+
+    font-weight: 900;
+}
+
+.tile:hover {
+    opacity: 0.8;
+    scale: 1.2;
+    rotate: -1deg;
+    cursor: pointer;
+}
+
+
+.square-invis-border {
+    background-color: black;
+    height: 100%;
+    border-radius: 6px;
+    padding: 4px;
+    display: grid;
+    grid-template: repeat(9, 1fr) / repeat(9, 1fr);
+    gap: .4px;
+}
+
+.sunken-panel {
+    padding: 2rem;
+    background-color: #f8f8f8; /* Light background */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: inset 3px 3px 10px rgba(0, 0, 0, 0.3); /* Inset shadow for the sunken effect */
+    position: relative;
+}
+
+.sunken-panel::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    background-color: #fff; /* Floating panel background */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Floating shadow effect */
+    z-index: -1; /* Ensure it's behind the content */
+    border-radius: 8px; /* Match or slightly rounder than the sunken panel */
+}
+
+.central-panel {
+    display: flex;
+    justify-content: center;
+    height: 80%;
+    max-height: 1068px;
+}
+
+.left-clicked {
+    transform: rotateY(360deg);
+}
+
+.reversed-tile {
+    border-radius: 5px 5px 5px 5px; 
+    border: 1px solid rgba(0, 0, 0, 0.37);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.527);
+    display: grid;
+    place-content: center;
+    transition: transform 1.2s ease;
+}
+
+.clicked-mine {
+    background-color: red;
+}
+
+.flagged {
+    background: linear-gradient(135deg, #a9a9a9, rgba(255, 0, 0, 0.432), #a9a9a9);
+    transform: rotateY(-360deg);
+}
+
+.checked {
+    transform: rotateY(360deg);
+    background-color: #a9a9a993;
+}
+/* .reversed-tile:hover {
+    scale: 1.1;
+    opacity: 0.8;  
+} */
+
+.mN-1 {
+    color: #2f6e97 ;
+}
+.mN-2 {
+    color: #116936;
+}
+.mN-3 {
+    color:  #E74C3C;
+}
+.mN-4 {
+    color: #0f88d8;
+}
+.mN-5 {
+    color: #6E2C00;
+}
+.mN-6 {
+    color: #bc1aa6;
+}
+.mN-7 {
+    color: #34495E;
+}
+.mN-8 {
+    color: #2C3E50;
+}
+
+
+
+@media (max-width: 1186px) and (min-height:840px), (max-width: 660px){
+    .test-div {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(8, 1fr);
+        margin: 0.25rem;
+        max-height: none;
+    }
+
+    .central-panel {
+        grid-column: 1 / 3;
+        grid-row: 1 / 6;
+        height: 100%;
+    }
+
+    .left-panel {
+        margin: 0.25rem;
+        grid-row: 7 / 8;
+        width: 90%;
+        border-radius: 4px 4px 4px 20px;
+    }
+
+    .right-panel {
+        grid-column: 2 / 3;
+        grid-row: 7 / 8;
+        border-radius: 4px 4px 20px 4px;
+    }
+
+    #start-game-btn, #reset-game-btn {
+        margin: 0.5rem;
+        padding: 0.25rem;
+    }
+} 
+
+@media (max-width: 568px) {
+    .timer-display, .mines-count {
+        margin: 1rem;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+}

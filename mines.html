@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MINESWEEPER</title>
+    <link rel="stylesheet" href="mines.css">
+</head>
+<body>
+    <header class="head-bar">
+        <div class="hourglass">⏳</div>
+        <div class="timer-display">0</div>
+        <div class="mine-show">💣</div>
+        <div class="mines-count">10</div>
+    </header>
+    <div class="test-div">
+        <div class="left-panel">
+            <div id="start-game-btn"> START </div>
+            <div id="reset-game-btn"> RESET </div>
+            <div id="space-eater"></div> 
+            <div id="pause-game-btn"> PAUSE </div>
+        </div>
+        
+        <div class="central-panel">
+            <div class="square-invis-border sunken-panel fade"></div>
+        </div>
+
+        <div class="right-panel">
+            <div class="title-score-display"> SCORE </div>
+            <div class="score-display">  </div>
+        </div>
+    </div>
+
+
+    <script src="mines.js"></script>
+    <script>
+        const container = document.querySelector('.square-invis-border');
+        function setWidthEqualToHeight() {
+            const height = container.offsetHeight;
+            container.style.width = `${height}px`;
+        }
+        
+        window.addEventListener('resize', setWidthEqualToHeight);
+         window.addEventListener('load', setWidthEqualToHeight);
+    </script>
+</body>
+</html>
